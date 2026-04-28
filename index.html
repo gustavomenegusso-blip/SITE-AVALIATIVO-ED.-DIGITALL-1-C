@@ -3,48 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual do Craque | Info & Regras</title>
+    <title>Arena FC | Infográfico Interativo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="a11y-toolbar" aria-label="Ferramentas de Acessibilidade">
-        <button onclick="updateFont('plus')" aria-label="Aumentar texto">A+</button>
-        <button onclick="updateFont('minus')" aria-label="Diminuir texto">A-</button>
-        <button id="theme-toggle" aria-label="Alternar Contraste">🌓 Alto Contraste</button>
+    <nav class="a11y-bar" aria-label="Acessibilidade">
+        <button onclick="changeFont('up')" aria-label="Aumentar texto">A+</button>
+        <button onclick="changeFont('down')" aria-label="Diminuir texto">A-</button>
+        <button id="toggle-contrast">🌓 Alternar Contraste</button>
     </nav>
 
-    <header class="hero-header">
-        <div class="logo">ARENA<span>INFO</span></div>
-        <p>O guia visual definitivo sobre as medidas e regras do futebol.</p>
+    <header class="main-header">
+        <div class="logo">ARENA<span>FC</span></div>
+        <p>A ciência por trás do esporte rei.</p>
     </header>
 
     <main>
-        <section id="comic-info" class="reveal">
-            <h2 class="title-main">A Ciência do Campo (HQ)</h2>
-            <div id="hq-grid" class="comic-container">
-                </div>
-        </section>
+        <section id="regras-hq" class="reveal">
+            <h2 class="section-title">Guia Visual do Campo</h2>
+            <div class="comic-grid">
+                <article class="comic-card">
+                    <div class="speech-bubble">
+                        <strong>O Elenco:</strong> Uma partida é jogada por duas equipes, cada uma com no máximo <strong>11 jogadores</strong>, sendo um deles o goleiro.
+                    </div>
+                    <div class="comic-footer">⚽ Mínimo de 7 jogadores para iniciar.</div>
+                </article>
 
-        <section id="regra-detalhada" class="reveal">
-            <h2 class="title-main">O Livro de Regras</h2>
-            <div id="rules-accordion" class="accordion">
-                </div>
+                <article class="comic-card">
+                    <div class="speech-bubble">
+                        <strong>A Meta (Gol):</strong> A distância entre os postes é de <strong>7,32 metros</strong> e a altura do travessão ao solo é de <strong>2,44 metros</strong>.
+                    </div>
+                    <div class="comic-footer">📏 Equivalente a 8 jardas por 8 pés.</div>
+                </article>
+
+                <article class="comic-card">
+                    <div class="speech-bubble">
+                        <strong>Postes e Travessão:</strong> Devem ser brancos e ter a mesma largura/profundidade, não superior a <strong>12 cm</strong>.
+                    </div>
+                    <div class="comic-footer">🏗️ Segurança máxima na fixação.</div>
+                </article>
+            </div>
         </section>
 
         <section id="curiosidades" class="reveal">
-            <h2 class="title-main">Curiosidades de Placar</h2>
-            <div class="carousel">
-                <div id="carousel-track" class="track"></div>
-                <div class="nav-btns">
-                    <button id="prev">⬅</button>
-                    <button id="next">➡</button>
+            <h2>Fatos Rápidos</h2>
+            <div class="carousel-container">
+                <div id="carousel-track" class="carousel-track">
+                    </div>
+                <div class="carousel-controls">
+                    <button id="prevBtn">Anterior</button>
+                    <button id="nextBtn">Próximo</button>
                 </div>
             </div>
         </section>
+
+        <section id="faq" class="reveal">
+            <h2>Dúvidas Técnicas</h2>
+            <div id="accordion-group">
+                </div>
+        </section>
     </main>
 
-    <footer class="footer">
-        <p>Conteúdo técnico baseado nas normas da IFAB/FIFA.</p>
+    <footer class="main-footer">
+        <p>&copy; 2024 Arena FC - Informações Oficiais FIFA/IFAB</p>
     </footer>
 
     <script src="script.js"></script>
