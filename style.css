@@ -1,81 +1,77 @@
 /* --- DESIGN SYSTEM --- */
 :root {
-    --green: #2ecc71;
-    --dark-green: #1b5e20;
-    --yellow: #f1c40f;
-    --white: #ffffff;
-    --black: #1a1a1a;
-    --radius: 10px;
-    --comic-shadow: 8px 8px 0px var(--black);
-    --font-size: 18px;
+    --primary: #2e7d32;
+    --accent: #fdd835;
+    --bg: #ffffff;
+    --text: #121212;
+    --radius: 8px;
+    --border-thick: 4px solid #000;
 }
 
-/* --- ALTO CONTRASTE --- */
+/* --- MODO ALTO CONTRASTE --- */
 body.high-contrast {
-    --green: #000;
-    --dark-green: #ffff00;
-    --white: #000;
-    --black: #fff;
-    --yellow: #fff;
+    --bg: #000;
+    --text: #fff;
+    --primary: #ffff00;
+    --accent: #fff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-size: var(--font-size);
-    background: var(--white);
-    color: var(--black);
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     line-height: 1.6;
+    transition: 0.3s;
 }
 
-.title-main { text-align: center; margin: 40px 0; font-size: 2.5rem; text-transform: uppercase; }
-
-/* --- COMIC GRID --- */
-.comic-container {
+/* --- HQ GRID LAYOUT --- */
+.comic-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
-.comic-panel {
-    background: var(--white);
-    border: 4px solid var(--black);
+.comic-card {
+    background: #fff;
+    color: #000;
+    border: var(--border-thick);
     padding: 20px;
-    box-shadow: var(--comic-shadow);
-    transition: 0.3s;
+    box-shadow: 10px 10px 0px var(--text);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-
-.comic-panel:hover { transform: scale(1.02); }
 
 .speech-bubble {
-    background: var(--yellow);
-    border: 3px solid var(--black);
-    border-radius: 15px;
+    border: 2px solid #000;
+    border-radius: 20px;
     padding: 15px;
+    background: var(--accent);
     margin-bottom: 15px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
-/* --- ACCORDION --- */
-.accordion { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-.acc-item { border: 3px solid var(--black); margin-bottom: 15px; border-radius: var(--radius); overflow: hidden; }
-.acc-header { 
-    width: 100%; background: var(--dark-green); color: white; padding: 15px; 
-    text-align: left; border: none; cursor: pointer; font-size: 1.2rem;
+/* --- COMPONENTES --- */
+.carousel-container {
+    overflow: hidden;
+    position: relative;
+    background: var(--primary);
+    color: white;
+    border-radius: var(--radius);
+    padding: 40px;
 }
-.acc-content { padding: 20px; display: none; background: #f9f9f9; color: #333; }
 
-/* --- CAROUSEL --- */
-.carousel { max-width: 800px; margin: 0 auto; overflow: hidden; position: relative; border: 4px solid var(--black); }
-.track { display: flex; transition: transform 0.5s ease; }
-.slide { min-width: 100%; padding: 40px; text-align: center; background: var(--green); color: white; }
+.carousel-track { display: flex; transition: 0.5s; }
+.carousel-item { min-width: 100%; text-align: center; }
 
-/* --- REVEAL ANIMATION --- */
-.reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease; }
+.acc-item { border-bottom: 2px solid var(--text); margin-bottom: 5px; }
+.acc-btn { width: 100%; padding: 15px; text-align: left; background: none; border: none; font-weight: bold; cursor: pointer; color: var(--text); }
+
+/* --- ANIMACAO REVEAL --- */
+.reveal { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-.a11y-toolbar { background: #333; padding: 10px; display: flex; justify-content: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
+.a11y-bar { background: #222; padding: 10px; display: flex; justify-content: center; gap: 10px; position: sticky; top: 0; z-index: 99; }
