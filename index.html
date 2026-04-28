@@ -3,55 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arena FC | A Jornada do Torcedor</title>
+    <title>Arena Geek FC | As Regras do Jogo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="accessibility-bar" aria-label="Acessibilidade">
-        <button onclick="changeFontSize('increase')" aria-label="Aumentar texto">A+</button>
-        <button onclick="changeFontSize('decrease')" aria-label="Diminuir texto">A-</button>
-        <button id="contrastToggle" title="Modo Escuro/Alto Contraste">🌓 Alternar Contraste</button>
+    <nav class="a11y-controls" aria-label="Controles de Acessibilidade">
+        <button onclick="adjustFont('up')" aria-label="Aumentar texto">A+</button>
+        <button onclick="adjustFont('down')" aria-label="Diminuir texto">A-</button>
+        <button id="contrastBtn" aria-label="Alternar Alto Contraste">🌓 Contraste</button>
     </nav>
 
     <header class="main-header">
-        <div class="logo">ARENA<span>FC</span></div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#historia">Aprenda</a></li>
-                <li><a href="#noticias">Notícias</a></li>
-                <li><a href="#faq">FAQ</a></li>
-            </ul>
-        </nav>
+        <div class="container flex-header">
+            <div class="logo">ARENA<span>FC</span></div>
+            <nav>
+                <ul class="nav-menu" role="list">
+                    <li><a href="#hq">Regras em HQ</a></li>
+                    <li><a href="#noticias">Notícias</a></li>
+                    <li><a href="#tecnico">Dados Técnicos</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section id="historia" class="comic-container scroll-reveal">
-            <h2 class="section-title">O Guia do Craque: Entendendo o Jogo</h2>
-            <div class="comic-grid" id="comic-render">
+        <section class="hero reveal">
+            <h1>Muito além do chute.</h1>
+            <p>Conheça a engenharia e as regras por trás do esporte mais amado do planeta.</p>
+        </section>
+
+        <section id="hq" class="reveal">
+            <h2 class="section-title">O Guia do Especialista</h2>
+            <div id="comic-grid" class="comic-layout">
                 </div>
-        </section>
-
-        <section id="noticias" class="news-section scroll-reveal">
-            <h2>Destaques em Campo</h2>
-            <div class="carousel" role="region" aria-roledescription="carousel">
-                <div class="carousel-track" id="news-track"></div>
-                <div class="carousel-nav">
-                    <button id="prev">Anterior</button>
-                    <button id="next">Próximo</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="faq-section scroll-reveal">
-            <h2>Tire suas Dúvidas</h2>
-            <div id="faq-list"></div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <p>2024 &copy; Arena FC - Acessibilidade é prioridade.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
