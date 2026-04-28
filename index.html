@@ -3,36 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arena Geek FC | As Regras do Jogo</title>
+    <title>Manual do Craque | Info & Regras</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="a11y-controls" aria-label="Controles de Acessibilidade">
-        <button onclick="adjustFont('up')" aria-label="Aumentar texto">A+</button>
-        <button onclick="adjustFont('down')" aria-label="Diminuir texto">A-</button>
-        <button id="contrastBtn" aria-label="Alternar Alto Contraste">🌓 Contraste</button>
+    <nav class="a11y-toolbar" aria-label="Ferramentas de Acessibilidade">
+        <button onclick="updateFont('plus')" aria-label="Aumentar texto">A+</button>
+        <button onclick="updateFont('minus')" aria-label="Diminuir texto">A-</button>
+        <button id="theme-toggle" aria-label="Alternar Contraste">🌓 Alto Contraste</button>
     </nav>
 
-    <header class="main-header">
-        <div class="container flex-header">
-            <div class="logo">ARENA<span>FC</span></div>
-            <nav>
-                <ul class="nav-menu" role="list">
-                    <li><a href="#hq">Regras em HQ</a></li>
-                    <li><a href="#noticias">Notícias</a></li>
-                    <li><a href="#tecnico">Dados Técnicos</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header class="hero-header">
+        <div class="logo">ARENA<span>INFO</span></div>
+        <p>O guia visual definitivo sobre as medidas e regras do futebol.</p>
     </header>
 
     <main>
-        <section class="hero reveal">
-            <h1>Muito além do chute.</h1>
-            <p>Conheça a engenharia e as regras por trás do esporte mais amado do planeta.</p>
+        <section id="comic-info" class="reveal">
+            <h2 class="title-main">A Ciência do Campo (HQ)</h2>
+            <div id="hq-grid" class="comic-container">
+                </div>
         </section>
 
-        <section id="hq" class="reveal">
-            <h2 class="section-title">O Guia do Especialista</h2>
-            <div id="comic-grid" class="comic-layout">
+        <section id="regra-detalhada" class="reveal">
+            <h2 class="title-main">O Livro de Regras</h2>
+            <div id="rules-accordion" class="accordion">
                 </div>
+        </section>
+
+        <section id="curiosidades" class="reveal">
+            <h2 class="title-main">Curiosidades de Placar</h2>
+            <div class="carousel">
+                <div id="carousel-track" class="track"></div>
+                <div class="nav-btns">
+                    <button id="prev">⬅</button>
+                    <button id="next">➡</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Conteúdo técnico baseado nas normas da IFAB/FIFA.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
