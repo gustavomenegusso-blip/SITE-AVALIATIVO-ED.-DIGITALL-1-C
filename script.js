@@ -1,134 +1,109 @@
-// --- GESTÃO DE DADOS (Simulando uma API) ---
+// BANCO DE DADOS DO SITE
+const footballData = {
+    comicPanels: [
+        {
+            char: "ÁRBITRO",
+            msg: "Atenção às medidas! O GOL oficial tem exatamente 7,32 metros de largura por 2,44 metros de altura.",
+            info: "Isso equivale a 8 jardas por 8 pés!"
+        },
+        {
+            char: "TÉCNICO",
+            msg: "Em campo, cada time tem 11 JOGADORES. Um deles deve ser obrigatoriamente o GOLEIRO.",
+            info: "Se um time tiver menos de 7 jogadores, a partida não pode começar."
+        },
+        {
+            char: "ENGENHEIRO",
+            msg: "Os POSTES e o TRAVESSÃO devem ser brancos e não podem ter largura superior a 12 cm.",
+            info: "Segurança é prioridade: as traves devem ser fixadas firmemente ao chão."
+        }
+    ],
+    rules: [
+        { title: "Duração da Partida", content: "Dois tempos iguais de 45 minutos, totalizando 90 minutos de jogo, mais os acréscimos definidos pelo árbitro." },
+        { title: "O Impedimento", content: "Um jogador está em posição de impedimento se qualquer parte da cabeça, corpo ou pés estiver no campo adversário e mais próximo da linha de meta que a bola e o penúltimo adversário." },
+        { title: "Substituições", content: "Atualmente, a maioria das competições permite até 5 substituições por equipe, realizadas em no máximo 3 paradas (além do intervalo)." }
+    ],
+    facts: [
+        { text: "A bola de futebol deve ter uma circunferência entre 68cm e 70cm." },
+        { text: "O peso da bola deve estar entre 410g e 450g no início da partida." },
+        { text: "A pressão da bola deve ser de 0.6 a 1.1 atmosferas." }
+    ]
+};
 
-const comicContent = [
-    {
-        character: "Doutor Bola",
-        text: "Você sabia que um campo oficial tem 11 jogadores de cada lado? É o equilíbrio perfeito entre espaço e estratégia!",
-        tip: "Dica: Sem o goleiro, ninguém estaria lá para impedir o grito de gol."
-    },
-    {
-        character: "Mestre da Regra",
-        text: "O Gol não é por acaso! Ele tem exatamente 7,32m de largura por 2,44m de altura.",
-        tip: "Curiosidade: Isso equivale a 8 jardas por 8 pés, uma herança inglesa!"
-    },
-    {
-        character: "Engenheiro de Campo",
-        text: "Os postes e o travessão são milimetricamente pensados: não podem ter mais de 12cm de largura.",
-        tip: "Segurança: Devem ser brancos e fixados firmemente ao solo."
-    }
-];
-
-const technicalDetails = [
-    { title: "O Elenco", content: "Cada equipe entra com 11 jogadores. O número mínimo para continuar uma partida é de 7 jogadores." },
-    { title: "A Meta (O Gol)", content: "Largura: 7,32m. Altura: 2,44m. O material deve ser madeira, metal ou outro aprovado." },
-    { title: "Equipamento", content: "A bola deve ter circunferência entre 68cm e 70cm, pesando entre 410g e 450g no início da partida." }
-];
-
-const newsData = [
-    { title: "Finais da Temporada", desc: "Acompanhe os horários dos jogos decisivos deste fim de semana." },
-    { title: "Tecnologia no Esporte", desc: "Como o VAR está mudando as decisões milimétricas no impedimento." }
-];
-
-// --- RENDERIZAÇÃO DINÂMICA ---
-
+// RENDERIZAÇÃO
 function init() {
-    const comicGrid = document.getElementById('comic-grid');
-    comicContent.forEach(item => {
-        const card = document.createElement('article');
-        card.className = 'comic-card';
-        card.innerHTML = `
-            <div class="speech-bubble"><strong>${item.character} diz:</strong><br>${item.text}</div>
-            <p>💡 <em>${item.tip}</em></p>
+    // Renderizar HQ
+    const hqGrid = document.getElementById('hq-grid');
+    footballData.comicPanels.forEach(panel => {
+        const div = document.createElement('div');
+        div.className = 'comic-panel';
+        div.innerHTML = `
+            <div class="speech-bubble"><strong>${panel.char} diz:</strong><br>${panel.msg}</div>
+            <p>📋 <em>${panel.info}</em></p>
         `;
-        comicGrid.appendChild(card);
+        hqGrid.appendChild(div);
     });
 
-    const accordion = document.getElementById('tech-accordion');
-    technicalDetails.forEach((item, index) => {
-        const section = document.createElement('div');
-        section.className = 'acc-item';
-        section.innerHTML = `
-            <button class="acc-header" aria-expanded="false" onclick="toggleAccordion(${index})">
-                ${item.title}
-            </button>
-            <div class="acc-body" id="acc-body-${index}">${item.content}</div>
+    // Renderizar Acordeão
+    const accordion = document.getElementById('rules-accordion');
+    footballData.rules.forEach((rule, index) => {
+        const item = document.createElement('div');
+        item.className = 'acc-item';
+        item.innerHTML = `
+            <button class="acc-header" onclick="toggleAcc(${index})">${rule.title}</button>
+            <div class="acc-content" id="content-${index}">${rule.content}</div>
         `;
-        accordion.appendChild(section);
+        accordion.appendChild(item);
     });
 
-    renderNews();
+    // Renderizar Carrossel
+    const track = document.getElementById('carousel-track');
+    footballData.facts.forEach(f => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.innerHTML = `<h3>Sabia disso?</h3><p>${f.text}</p>`;
+        track.appendChild(slide);
+    });
+
+    setupA11y();
     setupScrollReveal();
 }
 
-// --- COMPONENTES (LOGICA) ---
-
-// Acordeão
-function toggleAccordion(index) {
-    const bodies = document.querySelectorAll('.acc-body');
-    const headers = document.querySelectorAll('.acc-header');
-    const target = bodies[index];
-    const isVisible = target.style.display === 'block';
-
-    bodies.forEach(b => b.style.display = 'none');
-    headers.forEach(h => h.setAttribute('aria-expanded', 'false'));
-
-    if (!isVisible) {
-        target.style.display = 'block';
-        headers[index].setAttribute('aria-expanded', 'true');
-    }
+// LÓGICA DE COMPONENTES
+function toggleAcc(index) {
+    const contents = document.querySelectorAll('.acc-content');
+    const target = document.getElementById(`content-${index}`);
+    const isOpen = target.style.display === 'block';
+    
+    contents.forEach(c => c.style.display = 'none');
+    if(!isOpen) target.style.display = 'block';
 }
 
-// Carrossel
-let currentSlide = 0;
-function renderNews() {
-    const track = document.getElementById('news-track');
-    newsData.forEach(news => {
-        const slide = document.createElement('div');
-        slide.className = 'news-item';
-        slide.innerHTML = `<h3>${news.title}</h3><p>${news.desc}</p>`;
-        track.appendChild(slide);
-    });
+let slideIdx = 0;
+document.getElementById('next').onclick = () => moveSlide(1);
+document.getElementById('prev').onclick = () => moveSlide(-1);
+
+function moveSlide(step) {
+    const track = document.getElementById('carousel-track');
+    slideIdx = (slideIdx + step + footballData.facts.length) % footballData.facts.length;
+    track.style.transform = `translateX(-${slideIdx * 100}%)`;
 }
 
-document.getElementById('nextSlide').onclick = () => {
-    currentSlide = (currentSlide + 1) % newsData.length;
-    updateCarousel();
-};
-
-document.getElementById('prevSlide').onclick = () => {
-    currentSlide = (currentSlide - 1 + newsData.length) % newsData.length;
-    updateCarousel();
-};
-
-function updateCarousel() {
-    const track = document.getElementById('news-track');
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+// ACESSIBILIDADE
+function setupA11y() {
+    document.getElementById('theme-toggle').onclick = () => document.body.classList.toggle('high-contrast');
 }
 
-// --- ACESSIBILIDADE ---
-
-// Ajuste de Fonte Global
-let currentSize = 100;
-function adjustFont(dir) {
-    currentSize += (dir === 'up' ? 10 : -10);
-    document.body.style.fontSize = `${currentSize}%`;
+let fontSize = 18;
+function updateFont(op) {
+    fontSize += (op === 'plus' ? 2 : -2);
+    document.body.style.fontSize = fontSize + 'px';
 }
 
-// Alternar Contraste
-document.getElementById('contrastBtn').onclick = () => {
-    document.body.classList.toggle('high-contrast');
-};
-
-// --- SCROLL REVEAL (Observer API) ---
+// ANIMAÇÃO AO SCROLL
 function setupScrollReveal() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
