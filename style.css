@@ -1,98 +1,81 @@
-/* --- DESIGN TOKENS (VARIÁVEIS) --- */
+/* --- DESIGN SYSTEM --- */
 :root {
-    --primary: #1b5e20;   /* Verde Futebol */
-    --accent: #ffd600;    /* Amarelo Ouro */
-    --bg: #ffffff;
-    --text: #1a1a1a;
-    --comic-bg: #fdfdfd;
-    --border-width: 3px;
-    --radius: 12px;
-    --gap: 24px;
-    --font-base: 18px;
-    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --green: #2ecc71;
+    --dark-green: #1b5e20;
+    --yellow: #f1c40f;
+    --white: #ffffff;
+    --black: #1a1a1a;
+    --radius: 10px;
+    --comic-shadow: 8px 8px 0px var(--black);
+    --font-size: 18px;
 }
 
-/* --- MODO ALTO CONTRASTE --- */
+/* --- ALTO CONTRASTE --- */
 body.high-contrast {
-    --primary: #ffff00;
-    --accent: #ffffff;
-    --bg: #000000;
-    --text: #ffffff;
-    --comic-bg: #1a1a1a;
+    --green: #000;
+    --dark-green: #ffff00;
+    --white: #000;
+    --black: #fff;
+    --yellow: #fff;
 }
 
-/* --- RESET & ESTRUTURA --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    font-size: var(--font-base);
-    background-color: var(--bg);
-    color: var(--text);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: var(--font-size);
+    background: var(--white);
+    color: var(--black);
     line-height: 1.6;
-    transition: background 0.3s;
 }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.title-main { text-align: center; margin: 40px 0; font-size: 2.5rem; text-transform: uppercase; }
 
-/* --- HEADER & NAV --- */
-.main-header { background: var(--primary); color: white; padding: 1rem 0; }
-.flex-header { display: flex; justify-content: space-between; align-items: center; }
-.nav-menu { display: flex; list-style: none; gap: 20px; }
-.nav-menu a { color: white; text-decoration: none; font-weight: 600; }
-
-/* --- ESTILO HQ (STORYTELLING) --- */
-.comic-layout {
+/* --- COMIC GRID --- */
+.comic-container {
     display: grid;
-    grid-template-columns: 1fr; /* Mobile First */
-    gap: var(--gap);
-    padding: 20px 0;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-    /* Edite aqui o layout do Grid da HQ para Desktop */
-    .comic-layout { grid-template-columns: repeat(2, 1fr); }
+.comic-panel {
+    background: var(--white);
+    border: 4px solid var(--black);
+    padding: 20px;
+    box-shadow: var(--comic-shadow);
+    transition: 0.3s;
 }
 
-.comic-card {
-    background: var(--comic-bg);
-    border: var(--border-width) solid var(--text);
-    padding: 25px;
-    position: relative;
-    box-shadow: 10px 10px 0px var(--text);
-    transition: var(--transition);
-}
-
-.comic-card:hover { transform: translate(-5px, -5px); box-shadow: 15px 15px 0px var(--text); }
+.comic-panel:hover { transform: scale(1.02); }
 
 .speech-bubble {
-    border: 2px solid var(--text);
-    border-radius: 20px;
+    background: var(--yellow);
+    border: 3px solid var(--black);
+    border-radius: 15px;
     padding: 15px;
     margin-bottom: 15px;
-    background: white;
-    color: black;
-    position: relative;
+    font-weight: bold;
 }
 
-/* --- CARROSSEL --- */
-.carousel { overflow: hidden; position: relative; background: #eee; padding: 40px; border-radius: var(--radius); }
-.carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
-.news-item { min-width: 100%; padding: 20px; text-align: center; }
-
-/* --- ACORDEÃO --- */
-.acc-item { border-bottom: 2px solid var(--primary); margin-bottom: 10px; }
-.acc-header {
-    width: 100%; padding: 15px; text-align: left;
-    background: none; border: none; cursor: pointer;
-    font-size: 1.2rem; font-weight: bold; color: var(--text);
+/* --- ACCORDION --- */
+.accordion { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+.acc-item { border: 3px solid var(--black); margin-bottom: 15px; border-radius: var(--radius); overflow: hidden; }
+.acc-header { 
+    width: 100%; background: var(--dark-green); color: white; padding: 15px; 
+    text-align: left; border: none; cursor: pointer; font-size: 1.2rem;
 }
-.acc-body { display: none; padding: 15px; background: rgba(0,0,0,0.05); }
+.acc-content { padding: 20px; display: none; background: #f9f9f9; color: #333; }
 
-/* --- ANIMAÇÃO REVEAL --- */
-.reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+/* --- CAROUSEL --- */
+.carousel { max-width: 800px; margin: 0 auto; overflow: hidden; position: relative; border: 4px solid var(--black); }
+.track { display: flex; transition: transform 0.5s ease; }
+.slide { min-width: 100%; padding: 40px; text-align: center; background: var(--green); color: white; }
+
+/* --- REVEAL ANIMATION --- */
+.reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* --- A11Y BAR --- */
-.a11y-controls { background: #222; padding: 10px; display: flex; justify-content: center; gap: 15px; }
-.a11y-controls button { cursor: pointer; padding: 5px 15px; border-radius: 4px; border: none; }
+.a11y-toolbar { background: #333; padding: 10px; display: flex; justify-content: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
